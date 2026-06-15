@@ -1,0 +1,56 @@
+{
+  "name": "ArchLab — Explorador de Arquiteturas",
+  "short_name": "ArchLab",
+  "description": "Explore, compare e simule padrões de arquitetura de software.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#02030a",
+  "theme_color": "#02030a",
+  "categories": ["education", "developer tools"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quiz",
+      "url": "/quiz",
+      "description": "Descubra sua arquitetura ideal"
+    },
+    {
+      "name": "Comparar",
+      "url": "/comparar",
+      "description": "Comparar arquiteturas"
+    },
+    {
+      "name": "Evolução",
+      "url": "/evolucao",
+      "description": "Roadmap evolutivo"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home — Universo de constelações"
+    }
+  ]
+}

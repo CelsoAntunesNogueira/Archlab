@@ -88,24 +88,30 @@ const STAGES: EvolutionStage[] = [
   },
 ]
 
-function StageCard({ stage, active, onClick, index }: {
+function StageCard({
+  stage,
+  active,
+  onClick,
+  index,
+}: {
   stage: EvolutionStage
   active: boolean
   onClick: () => void
   index: number
 }) {
   const r = useReveal()
+
   return (
-    <div
+    <button
       ref={r}
-      className="reveal cursor-pointer transition-all duration-300 relative"
+      type="button"
+      className="reveal w-full text-left transition-all duration-300 relative"
       style={{ transitionDelay: `${index * 0.06}s` }}
       onClick={onClick}
     >
-      {/* connector line */}
       {index < STAGES.length - 1 && (
         <div
-          className="absolute left-1/2 -translate-x-1/2 w-px"
+          className="hidden lg:block absolute left-1/2 -translate-x-1/2 w-px"
           style={{
             top: '100%',
             height: 32,
@@ -116,7 +122,7 @@ function StageCard({ stage, active, onClick, index }: {
       )}
 
       <div
-        className="p-5 transition-all duration-300"
+        className="p-4 sm:p-5 rounded-xl transition-all duration-300"
         style={{
           background: active ? `${stage.color}12` : 'rgba(8,14,35,0.5)',
           border: `1px solid ${active ? stage.color : 'rgba(136,150,204,0.1)'}`,
@@ -124,7 +130,7 @@ function StageCard({ stage, active, onClick, index }: {
           transform: active ? 'scale(1.02)' : 'scale(1)',
         }}
       >
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-3 mb-2 flex-wrap">
           <div
             className="w-3 h-3 rounded-full flex-shrink-0"
             style={{
@@ -132,60 +138,98 @@ function StageCard({ stage, active, onClick, index }: {
               boxShadow: active ? `0 0 10px ${stage.color}` : 'none',
             }}
           />
-          <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase" style={{ color: stage.color }}>
+
+          <span
+            className="font-mono text-xs tracking-[0.18em] uppercase"
+            style={{ color: stage.color }}
+          >
             {stage.year}
           </span>
-          <span className="font-mono text-[0.52rem] tracking-[0.12em] uppercase ml-auto" style={{ color: 'var(--color-dim)' }}>
+
+          <span
+            className="font-mono text-xs tracking-[0.08em] uppercase lg:ml-auto"
+            style={{ color: 'var(--color-dim)' }}
+          >
             {stage.users} usuários
           </span>
         </div>
-        <div className="font-bold text-[0.9rem] mb-1">{stage.arch}</div>
-        <div className="font-mono text-[0.6rem]" style={{ color: 'var(--color-dim)' }}>{stage.team}</div>
+
+        <div className="font-bold text-base sm:text-[0.95rem] mb-1">
+          {stage.arch}
+        </div>
+
+        <div
+          className="font-mono text-xs"
+          style={{ color: 'var(--color-dim)' }}
+        >
+          {stage.team}
+        </div>
       </div>
-    </div>
+    </button>
   )
 }
 
 function StageDetail({ stage }: { stage: EvolutionStage }) {
   const r = useReveal()
+
   return (
-    <div ref={r} className="reveal sticky top-28">
+    <div ref={r} className="reveal lg:sticky lg:top-28 self-start">
       <div
-        className="p-8"
+        className="p-5 sm:p-6 lg:p-8 rounded-2xl"
         style={{
           background: 'rgba(8,14,35,0.7)',
           border: `1px solid ${stage.color}30`,
           backdropFilter: 'blur(16px)',
         }}
       >
-        {/* Header */}
         <div className="mb-6">
-          <span className="font-mono text-[0.58rem] tracking-[0.3em] uppercase block mb-2" style={{ color: stage.color }}>
+          <span
+            className="font-mono text-xs tracking-[0.24em] uppercase block mb-2"
+            style={{ color: stage.color }}
+          >
             {stage.title}
           </span>
-          <h2 className="font-black text-[2rem] leading-tight mb-1">{stage.arch}</h2>
-          <div className="flex gap-4 font-mono text-[0.6rem]" style={{ color: 'var(--color-dim)' }}>
+
+          <h2 className="font-black text-[1.55rem] sm:text-[2rem] leading-tight mb-2">
+            {stage.arch}
+          </h2>
+
+          <div
+            className="flex flex-wrap gap-2 sm:gap-3 font-mono text-xs"
+            style={{ color: 'var(--color-dim)' }}
+          >
             <span>{stage.users} usuários</span>
-            <span>·</span>
+            <span className="hidden sm:inline">·</span>
             <span>{stage.team}</span>
-            <span>·</span>
+            <span className="hidden sm:inline">·</span>
             <span>{stage.year}</span>
           </div>
         </div>
 
-        <p className="font-mono text-[0.72rem] leading-[1.9] mb-6" style={{ color: 'var(--color-dim2)' }}>
+        <p
+          className="font-mono text-sm leading-7 mb-6"
+          style={{ color: 'var(--color-dim2)' }}
+        >
           {stage.description}
         </p>
 
-        {/* Stack */}
         <div className="mb-6">
-          <div className="font-mono text-[0.56rem] tracking-[0.25em] uppercase mb-3" style={{ color: 'var(--color-dim)' }}>Stack</div>
+          <div
+            className="font-mono text-xs tracking-[0.22em] uppercase mb-3"
+            style={{ color: 'var(--color-dim)' }}
+          >
+            Stack
+          </div>
+
           <div className="flex flex-wrap gap-2">
-            {stage.stack.map(s => (
+            {stage.stack.map((s) => (
               <span
                 key={s}
-                className="px-2 py-1 font-mono text-[0.58rem] tracking-[0.08em]"
-                style={{ border: `1px solid ${stage.color}30`, color: stage.color }}
+                className="px-2 py-1 font-mono text-xs tracking-[0.06em] rounded-md"
+                style={{
+                  border: `1px solid ${stage.color}30`,
+                  color: stage.color,
+                }}
               >
                 {s}
               </span>
@@ -193,26 +237,48 @@ function StageDetail({ stage }: { stage: EvolutionStage }) {
           </div>
         </div>
 
-        {/* Pain point */}
         <div
-          className="p-4 mb-4"
-          style={{ background: 'rgba(239,154,154,0.06)', border: '1px solid rgba(239,154,154,0.15)' }}
+          className="p-4 mb-4 rounded-xl"
+          style={{
+            background: 'rgba(239,154,154,0.06)',
+            border: '1px solid rgba(239,154,154,0.15)',
+          }}
         >
-          <div className="font-mono text-[0.54rem] tracking-[0.2em] uppercase mb-2" style={{ color: '#ef9a9a' }}>
+          <div
+            className="font-mono text-xs tracking-[0.18em] uppercase mb-2"
+            style={{ color: '#ef9a9a' }}
+          >
             ↓ Ponto de dor
           </div>
-          <p className="font-mono text-[0.67rem] leading-[1.75]" style={{ color: 'var(--color-dim2)' }}>{stage.pain}</p>
+
+          <p
+            className="font-mono text-sm leading-7"
+            style={{ color: 'var(--color-dim2)' }}
+          >
+            {stage.pain}
+          </p>
         </div>
 
-        {/* Trigger */}
         <div
-          className="p-4"
-          style={{ background: 'rgba(165,214,167,0.06)', border: '1px solid rgba(165,214,167,0.15)' }}
+          className="p-4 rounded-xl"
+          style={{
+            background: 'rgba(165,214,167,0.06)',
+            border: '1px solid rgba(165,214,167,0.15)',
+          }}
         >
-          <div className="font-mono text-[0.54rem] tracking-[0.2em] uppercase mb-2" style={{ color: '#a5d6a7' }}>
+          <div
+            className="font-mono text-xs tracking-[0.18em] uppercase mb-2"
+            style={{ color: '#a5d6a7' }}
+          >
             → Gatilho da próxima fase
           </div>
-          <p className="font-mono text-[0.67rem] leading-[1.75]" style={{ color: 'var(--color-dim2)' }}>{stage.trigger}</p>
+
+          <p
+            className="font-mono text-sm leading-7"
+            style={{ color: 'var(--color-dim2)' }}
+          >
+            {stage.trigger}
+          </p>
         </div>
       </div>
     </div>
@@ -227,27 +293,25 @@ function EvolutionCanvas({ activeIndex }: { activeIndex: number }) {
     if (!canvas) return
 
     function draw() {
-      if (!canvas) return
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
+      const ctx = canvas?.getContext('2d')
+      if (!ctx || !canvas) return
 
       canvas.width = canvas.offsetWidth || 800
       canvas.height = 120
 
       const W = canvas.width
       const H = 120
-      const PAD = 56
+      const PAD = W < 640 ? 28 : 56
       const usableW = W - PAD * 2
 
       ctx.clearRect(0, 0, W, H)
 
-      const colors = STAGES.map(s => s.color)
+      const colors = STAGES.map((s) => s.color)
       const nodeX = STAGES.map((_, i) =>
         STAGES.length === 1 ? W / 2 : PAD + (usableW / (STAGES.length - 1)) * i
       )
       const nodeY = 52
 
-      // Connections
       for (let i = 0; i < STAGES.length - 1; i++) {
         const active = i <= activeIndex - 1
         ctx.beginPath()
@@ -260,7 +324,6 @@ function EvolutionCanvas({ activeIndex }: { activeIndex: number }) {
         ctx.setLineDash([])
       }
 
-      // Nodes
       STAGES.forEach((stage, i) => {
         const x = nodeX[i]
         const isActive = i === activeIndex
@@ -280,14 +343,19 @@ function EvolutionCanvas({ activeIndex }: { activeIndex: number }) {
         ctx.arc(x, nodeY, isActive ? 10 : 7, 0, Math.PI * 2)
         ctx.fillStyle = isActive || isPast ? stage.color : 'rgba(136,150,204,0.2)'
         ctx.fill()
+
         if (isActive) {
           ctx.strokeStyle = stage.color
           ctx.lineWidth = 2
           ctx.stroke()
         }
 
-        ctx.fillStyle = isActive ? stage.color : isPast ? stage.color + '99' : 'rgba(136,150,204,0.4)'
-        ctx.font = `${isActive ? '700' : '400'} 10px Syne, sans-serif`
+        ctx.fillStyle = isActive
+          ? stage.color
+          : isPast
+          ? stage.color + '99'
+          : 'rgba(136,150,204,0.4)'
+        ctx.font = `${isActive ? '700' : '400'} ${W < 640 ? 9 : 10}px sans-serif`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
         const label = stage.arch.split(' ')[0]
@@ -299,16 +367,11 @@ function EvolutionCanvas({ activeIndex }: { activeIndex: number }) {
 
     const observer = new ResizeObserver(() => draw())
     observer.observe(canvas.parentElement ?? canvas)
+
     return () => observer.disconnect()
   }, [activeIndex])
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full block"
-      style={{ height: 120 }}
-    />
-  )
+  return <canvas ref={canvasRef} className="w-full block" style={{ height: 120 }} />
 }
 
 export function EvolutionPage() {
@@ -316,31 +379,47 @@ export function EvolutionPage() {
   const headerRef = useReveal()
 
   return (
-    <div className="max-w-[1200px] mx-auto px-8 py-12">
-      <div ref={headerRef} className="reveal text-center mb-16">
-        <span className="font-mono text-[0.62rem] tracking-[0.38em] uppercase block mb-4" style={{ color: 'var(--color-arch-gold)' }}>
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <div ref={headerRef} className="reveal text-center mb-10 sm:mb-12 lg:mb-16">
+        <span
+          className="font-mono text-xs tracking-[0.28em] uppercase block mb-4"
+          style={{ color: 'var(--color-arch-gold)' }}
+        >
           // Roadmap Evolutivo
         </span>
-        <h1 className="font-black tracking-[-0.02em] leading-[1.05] mb-5" style={{ fontSize: 'clamp(2rem,5vw,3.5rem)' }}>
-          Como um sistema<br />evolui com o tempo
+
+        <h1
+          className="font-black tracking-[-0.02em] leading-[1.05] mb-5"
+          style={{ fontSize: 'clamp(1.9rem, 7vw, 3.5rem)' }}
+        >
+          Como um sistema
+          <br />
+          evolui com o tempo
         </h1>
-        <p className="font-mono text-[0.76rem] leading-[1.95] max-w-[520px] mx-auto" style={{ color: 'var(--color-dim2)' }}>
-          Nenhuma empresa começa com microsserviços. Cada arquitetura existe para resolver um problema específico do momento. Veja a jornada real de um produto de software.
+
+        <p
+          className="font-mono text-sm leading-7 max-w-[520px] mx-auto"
+          style={{ color: 'var(--color-dim2)' }}
+        >
+          Nenhuma empresa começa com microsserviços. Cada arquitetura existe
+          para resolver um problema específico do momento. Veja a jornada real
+          de um produto de software.
         </p>
       </div>
 
-      {/* Timeline canvas */}
       <div
-        className="mb-12 p-6"
-        style={{ background: 'rgba(8,14,35,0.5)', border: '1px solid rgba(136,150,204,0.08)', backdropFilter: 'blur(10px)' }}
+        className="mb-8 sm:mb-10 lg:mb-12 p-4 sm:p-5 lg:p-6 rounded-2xl"
+        style={{
+          background: 'rgba(8,14,35,0.5)',
+          border: '1px solid rgba(136,150,204,0.08)',
+          backdropFilter: 'blur(10px)',
+        }}
       >
         <EvolutionCanvas activeIndex={activeIdx} />
       </div>
 
-      {/* Main content */}
-      <div className="grid gap-8" style={{ gridTemplateColumns: '280px 1fr' }}>
-        {/* Stage list */}
-        <div className="flex flex-col gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-6 lg:gap-8">
+        <div className="flex flex-col gap-4 lg:gap-8 order-2 lg:order-1">
           {STAGES.map((stage, i) => (
             <StageCard
               key={stage.id}
@@ -352,16 +431,16 @@ export function EvolutionPage() {
           ))}
         </div>
 
-        {/* Detail */}
-        <StageDetail stage={STAGES[activeIdx]} />
+        <div className="order-1 lg:order-2">
+          <StageDetail stage={STAGES[activeIdx]} />
+        </div>
       </div>
 
-      {/* Nav */}
-      <div className="flex justify-center gap-4 mt-16">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mt-5 sm:mt-6 lg:mt-8">
         <button
-          onClick={() => setActiveIdx(i => Math.max(0, i - 1))}
+          onClick={() => setActiveIdx((i) => Math.max(0, i - 1))}
           disabled={activeIdx === 0}
-          className="px-6 py-3 font-mono text-[0.65rem] tracking-[0.15em] uppercase transition-all duration-200"
+          className="w-full sm:w-auto min-h-11 px-6 py-3 font-mono text-xs tracking-[0.12em] uppercase transition-all duration-200 rounded-lg"
           style={{
             border: '1px solid rgba(136,150,204,0.2)',
             color: activeIdx === 0 ? 'var(--color-dim)' : 'var(--color-dim2)',
@@ -371,13 +450,18 @@ export function EvolutionPage() {
         >
           ← Fase anterior
         </button>
-        <span className="flex items-center font-mono text-[0.6rem]" style={{ color: 'var(--color-dim)' }}>
+
+        <span
+          className="flex items-center font-mono text-xs"
+          style={{ color: 'var(--color-dim)' }}
+        >
           {activeIdx + 1} / {STAGES.length}
         </span>
+
         <button
-          onClick={() => setActiveIdx(i => Math.min(STAGES.length - 1, i + 1))}
+          onClick={() => setActiveIdx((i) => Math.min(STAGES.length - 1, i + 1))}
           disabled={activeIdx === STAGES.length - 1}
-          className="px-6 py-3 font-mono text-[0.65rem] tracking-[0.15em] uppercase transition-all duration-200"
+          className="w-full sm:w-auto min-h-11 px-6 py-3 font-mono text-xs tracking-[0.12em] uppercase transition-all duration-200 rounded-lg"
           style={{
             border: `1px solid ${STAGES[activeIdx].color}`,
             color: STAGES[activeIdx].color,

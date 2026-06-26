@@ -157,17 +157,7 @@ export function Navbar() {
                 </li>
               )
             })}
-            {installable && (
-              <li className="pt-2">
-                <button
-                  onClick={() => { install(); closeMenu() }}
-                  className="w-full font-mono text-[0.7rem] tracking-[0.12em] uppercase py-3 transition-all duration-200"
-                  style={{ border: '1px solid rgba(79,195,247,0.4)', color: 'var(--color-arch-cyan)', background: 'transparent' }}
-                >
-                  ↓ Instalar App
-                </button>
-              </li>
-            )}
+            
           </ul>
         </div>
       </nav>

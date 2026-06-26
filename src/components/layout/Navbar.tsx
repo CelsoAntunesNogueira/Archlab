@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import { usePWA } from '@/hooks/usePWA'
+
 
 const links = [
   { to: '/#explorar', label: 'Explorar'  },
@@ -13,7 +13,6 @@ const links = [
 export function Navbar() {
   const location = useLocation()
   const isDetail = location.pathname.startsWith('/architecture')
-  const { installable, install } = usePWA()
   const [menuOpen, setMenuOpen] = useState(false)
 
   const closeMenu = () => setMenuOpen(false)
@@ -58,17 +57,7 @@ export function Navbar() {
               )
             })}
 
-            {installable && (
-              <li>
-                <button
-                  onClick={install}
-                  className="font-mono text-[0.6rem] tracking-[0.12em] uppercase px-3 py-1 transition-all duration-200"
-                  style={{ border: '1px solid rgba(79,195,247,0.4)', color: 'var(--color-arch-cyan)', background: 'transparent' }}
-                >
-                  ↓ Instalar
-                </button>
-              </li>
-            )}
+            
 
             {isDetail && (
               <li>

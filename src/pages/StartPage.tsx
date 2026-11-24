@@ -17,7 +17,7 @@ interface PathOption {
 const PATHS: PathOption[] = [
   {
     id: 'videos',
-    icon: '🎬',
+    icon: '',
     tag: 'Caminho 1',
     title: 'Aprender com vídeos',
     desc: 'Para quem prefere ver alguém explicando passo a passo. Videoaulas gratuitas, em português, para começar do zero.',
@@ -29,11 +29,11 @@ const PATHS: PathOption[] = [
   },
   {
     id: 'roadmap',
-    icon: '🧭',
+    icon: '',
     tag: 'Caminho 2',
     title: 'Seguir um roadmap',
     desc: 'Para quem é autodidata e prefere um mapa para estudar no próprio ritmo, escolhendo a ordem.',
-    points: ['Mapa visual no Miro', 'Você define o ritmo e a ordem', 'Dá para dar zoom e navegar pelo board'],
+    points: ['Mapa visual no Miro', 'Você define o ritmo e a ordem', 'trilha do Jr ao Sênior'],
     cta: 'Abrir o roadmap',
     href: 'https://miro.com/app/board/uXjVG1Y69Ww=/',
     credit: 'Mapa do Arquiteto · Renato Augusto',
@@ -206,7 +206,7 @@ export function StartPage() {
             color: 'var(--color-dim2)',
           }}
         >
-          Não existe um jeito certo de aprender. Escolha o caminho que combina com você e, depois, volte para explorar as arquiteturas.
+          Escolha o caminho que combina com você e depois volte para explorar as arquiteturas.
         </p>
       </div>
 

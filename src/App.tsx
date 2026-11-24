@@ -7,6 +7,7 @@ import { QuizPage } from '@/pages/QuizPage'
 import { DocsPage } from '@/pages/DocsPage'
 import { EvolutionPage } from '@/pages/EvolutionPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { StartPage } from '@/pages/StartPage'
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
           <Route path="/evolucao"            element={<EvolutionPage />}    />
           <Route path="/docs"                element={<DocsPage />}         />
           <Route path="*"                    element={<NotFoundPage />}     />
+          <Route path="/comecar" element={<StartPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

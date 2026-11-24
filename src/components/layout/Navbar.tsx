@@ -8,7 +8,7 @@ const links = [
   { to: '/quiz',      label: 'Quiz'      },
   { to: '/evolucao',  label: 'Evolução'  },
   { to: '/docs',      label: 'Docs'      },
-  { to: '/comecar', label: 'Começar' },
+  { to: '/comecar', label: 'Começando do Zero' },
 ]
 
 export function Navbar() {
